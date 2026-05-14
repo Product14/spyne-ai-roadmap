@@ -76,6 +76,7 @@
     .done-title   { background: #16a34a; }
     .picked-title { background: #2563eb; }
     .later-title  { background: #b45309; }
+    .hold-title   { background: #7c3aed; }
 
     /* ── Table ── */
     .table-wrap {
@@ -124,6 +125,7 @@
     .epic-vid  { background: #fee2e2; color: #b91c1c; }
     .epic-edge { background: #fef9c3; color: #92400e; }
     .epic-3d   { background: #f3e8ff; color: #6d28d9; }
+    .hold-title { background: #7c3aed; }
 
     /* Goal */
     .td-goal { color: #475569; font-size: 11px; max-width: 180px; line-height: 1.35; }
@@ -553,6 +555,123 @@
             <td class="td-story">Exterior Remove BG — 360 + Image</td>
             <td><span class="epic epic-img">Images</span></td>
             <td class="td-goal">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ ON HOLD ══ -->
+  <div class="section" id="s-hold">
+    <div class="section-title hold-title" onclick="toggle('s-hold')">
+      <span>⏸</span>
+      <h2>On Hold</h2>
+      <span class="count">10 items</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Feature / Story</th>
+            <th>Epic</th>
+            <th>Goal</th>
+            <th>Owner</th>
+            <th>ETA</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">1</td>
+            <td class="td-story">Defect Severity</td>
+            <td><span class="epic epic-insp">Inspection</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">6 May</td>
+            <td class="td-note">Priority 1b</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">2</td>
+            <td class="td-story">Interior Auto QC</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Atharv</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">3</td>
+            <td class="td-story">Background Generation Image/Video/Panoramic — Phase 2</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+            <td><span class="owner">Utkarsh</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">4</td>
+            <td class="td-story">Focus Shoot Auto QC</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">5</td>
+            <td class="td-story">3D output file size reduction &amp; loading time</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">6</td>
+            <td class="td-story">Exterior Car Features / Hotspots — 3D</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">7</td>
+            <td class="td-story">Floor Removal, Shadow Generation &amp; Placement in Showroom</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">8</td>
+            <td class="td-story">Licence Plate Masking in 3D</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">9</td>
+            <td class="td-story">Pano to Interior 3D</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">10</td>
+            <td class="td-story">Processing Time Reduction (currently 40–45 mins)</td>
+            <td><span class="epic epic-3d">3D</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">—</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
           </tr>
         </tbody>
       </table>
