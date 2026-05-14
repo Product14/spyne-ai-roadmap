@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spyne AI Roadmap — CEO Review</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f8f9fb;
+      color: #111827;
+      font-size: 13px;
+    }
+
+    /* ── Page wrapper ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 32px 28px 48px; }
+
+    /* ── Header ── */
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, #e94560, #0f3460);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: 14px;
+    }
+    .header-title h1 { font-size: 18px; font-weight: 700; color: #0f172a; }
+    .header-title p  { font-size: 11px; color: #64748b; margin-top: 1px; }
+    .header-right { text-align: right; font-size: 11px; color: #64748b; line-height: 1.7; }
+
+    /* ── Stat pills ── */
+    .stats {
+      display: flex; gap: 10px; margin-bottom: 28px;
+    }
+    .stat {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 8px;
+      border: 1px solid transparent; font-size: 12px;
+    }
+    .stat-num { font-size: 20px; font-weight: 800; line-height: 1; }
+    .stat-lbl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: #64748b; }
+    .stat.done   { background: #f0fdf4; border-color: #86efac; }
+    .stat.picked { background: #eff6ff; border-color: #93c5fd; }
+    .stat.later  { background: #fefce8; border-color: #fde68a; }
+    .stat.hold   { background: #faf5ff; border-color: #d8b4fe; }
+    .stat.done   .stat-num { color: #16a34a; }
+    .stat.picked .stat-num { color: #2563eb; }
+    .stat.later  .stat-num { color: #b45309; }
+    .stat.hold   .stat-num { color: #7c3aed; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 28px; }
+
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; border-radius: 8px 8px 0 0;
+      cursor: pointer; user-select: none;
+    }
+    .section-title h2 { font-size: 13px; font-weight: 700; color: #fff; flex: 1; }
+    .section-title .count {
+      background: rgba(255,255,255,.25); color: #fff;
+      font-size: 11px; font-weight: 700;
+      padding: 2px 10px; border-radius: 20px;
+    }
+    .section-title .chevron {
+      color: rgba(255,255,255,.8); font-size: 11px;
+      transition: transform .2s;
+    }
+    .section.closed .chevron { transform: rotate(-90deg); }
+
+    .done-title   { background: #16a34a; }
+    .picked-title { background: #2563eb; }
+    .later-title  { background: #b45309; }
+
+    /* ── Table ── */
+    .table-wrap {
+      border: 1px solid #e2e8f0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      transition: max-height .3s ease;
+      max-height: 2000px;
+    }
+    .section.closed .table-wrap {
+      max-height: 0;
+    }
+
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+
+    thead th {
+      background: #f8fafc;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      color: #64748b;
+      padding: 8px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left; white-space: nowrap;
+    }
+
+    tbody tr { border-bottom: 1px solid #f1f5f9; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f8fafc; }
+
+    td { padding: 9px 12px; vertical-align: middle; }
+
+    /* Story cell */
+    .td-story { font-weight: 600; color: #1e293b; font-size: 12px; max-width: 320px; line-height: 1.4; }
+
+    /* Epic badge */
+    .epic {
+      display: inline-block;
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .4px; padding: 2px 7px; border-radius: 4px;
+      white-space: nowrap;
+    }
+    .epic-360  { background: #dbeafe; color: #1d4ed8; }
+    .epic-img  { background: #fce7f3; color: #be185d; }
+    .epic-insp { background: #dcfce7; color: #15803d; }
+    .epic-vid  { background: #fee2e2; color: #b91c1c; }
+    .epic-edge { background: #fef9c3; color: #92400e; }
+    .epic-3d   { background: #f3e8ff; color: #6d28d9; }
+
+    /* Goal */
+    .td-goal { color: #475569; font-size: 11px; max-width: 180px; line-height: 1.35; }
+
+    /* Owner */
+    .owner {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #e0f2fe; color: #0369a1;
+      font-size: 10px; font-weight: 700;
+      border-radius: 20px; padding: 2px 9px; white-space: nowrap;
+    }
+
+    /* ETA */
+    .td-eta { color: #64748b; font-size: 11px; white-space: nowrap; }
+
+    /* Priority */
+    .prio {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 7px; border-radius: 4px;
+      background: #f5f3ff; color: #5b21b6;
+    }
+
+    /* Notes */
+    .td-note { color: #64748b; font-size: 11px; max-width: 200px; line-height: 1.35; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; font-size: 10px; color: #94a3b8;
+      padding-top: 20px; border-top: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">S</div>
+      <div class="header-title">
+        <h1>Spyne AI Roadmap</h1>
+        <p>Executive Summary · May 2025</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div>Prepared for CEO Review</div>
+      <div>Last updated: 14 May 2025</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat done">
+      <div>
+        <div class="stat-num">11</div>
+        <div class="stat-lbl">Done</div>
+      </div>
+    </div>
+    <div class="stat picked">
+      <div>
+        <div class="stat-num">10</div>
+        <div class="stat-lbl">In Progress</div>
+      </div>
+    </div>
+    <div class="stat later">
+      <div>
+        <div class="stat-num">13</div>
+        <div class="stat-lbl">Later</div>
+      </div>
+    </div>
+    <div class="stat hold">
+      <div>
+        <div class="stat-num">10</div>
+        <div class="stat-lbl">On Hold</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DONE ══ -->
+  <div class="section" id="s-done">
+    <div class="section-title done-title" onclick="toggle('s-done')">
+      <span>✅</span>
+      <h2>Done — Shipped & Delivered</h2>
+      <span class="count">11 items</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Feature / Story</th>
+            <th>Epic</th>
+            <th>Goal</th>
+            <th>Owner</th>
+            <th>ETA</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">1</td>
+            <td class="td-story">360 Processing time reduction to under 10 mins</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Turnul</span></td>
+            <td class="td-eta">28 Apr</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">2</td>
+            <td class="td-story">BG removal for all focus shoots + open doors + trunk</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">3</td>
+            <td class="td-story">4 to 36 — Replace 8 image 360 spin</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Hetansh</span></td>
+            <td class="td-eta">7 Apr</td>
+            <td class="td-note">Dev pending</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">4</td>
+            <td class="td-story">360 from Broken Video</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Hetansh</span></td>
+            <td class="td-eta">7 Apr</td>
+            <td class="td-note">Dev pending</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">5</td>
+            <td class="td-story">Background Generation from Image/Video/Panoramic — Phase 1</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+            <td><span class="owner">Utkarsh</span></td>
+            <td class="td-eta">7 Apr</td>
+            <td class="td-note">Done V1 · text may distort</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">6</td>
+            <td class="td-story">Segmentation</td>
+            <td><span class="epic epic-insp">Inspection</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">6 May</td>
+            <td class="td-note">Priority 1</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">7</td>
+            <td class="td-story">Defect Classifier (Dent, Damage, Scratch)</td>
+            <td><span class="epic epic-insp">Inspection</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">6 May</td>
+            <td class="td-note">Priority 1a</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">8</td>
+            <td class="td-story">Background Recommendation</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+            <td><span class="owner">Utkarsh</span></td>
+            <td class="td-eta">6 May</td>
+            <td class="td-note">Product Experience (OB handling)</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">9</td>
+            <td class="td-story">Exterior Auto QC</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Atharv</span></td>
+            <td class="td-eta">15 May</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">10</td>
+            <td class="td-story">Hotspot Accuracy Improvement</td>
+            <td><span class="epic epic-vid">Video</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">—</td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">11</td>
+            <td class="td-story">Service Separation — Images</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">—</td>
+            <td><span class="owner">Tumul</span></td>
+            <td class="td-eta">3 Apr</td>
+            <td class="td-note">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ PICKED ══ -->
+  <div class="section" id="s-picked">
+    <div class="section-title picked-title" onclick="toggle('s-picked')">
+      <span>🚀</span>
+      <h2>Picked — In Progress</h2>
+      <span class="count">10 items</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Feature / Story</th>
+            <th>Epic</th>
+            <th>Goal</th>
+            <th>Owner</th>
+            <th>ETA</th>
+            <th>Priority</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">1</td>
+            <td class="td-story">360 interior without Ricoh Theta</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Revenue growth</td>
+            <td><span class="owner">Utkarsh</span></td>
+            <td class="td-eta">6–20 May</td>
+            <td><span class="prio">P2</span></td>
+            <td class="td-note">Text &amp; logo enhancements · image refinements</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">2</td>
+            <td class="td-story">0.5x shoot to 1x background mapping</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+            <td><span class="owner">Utkarsh</span></td>
+            <td class="td-eta">19 May</td>
+            <td><span class="prio">P2</span></td>
+            <td class="td-note">Share samples to validate</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">3</td>
+            <td class="td-story">Swiggy AI model improvements</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+            <td><span class="owner">Shreyank</span></td>
+            <td class="td-eta">13 May</td>
+            <td><span class="prio">P3</span></td>
+            <td class="td-note">V1 done</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">4</td>
+            <td class="td-story">Reflection + Exposure + Light Correction (Studio lighting)</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+            <td><span class="owner">Shreyank</span></td>
+            <td class="td-eta">6 May</td>
+            <td><span class="prio">P3</span></td>
+            <td class="td-note">15 sec/image · needs 80GB instance</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">5</td>
+            <td class="td-story">Interior + Interior focus shoot</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">6–11 May</td>
+            <td><span class="prio">P4</span></td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">6</td>
+            <td class="td-story">Open Door, Trunk — Remove BG model improvement</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">13 May</td>
+            <td><span class="prio">P5</span></td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">7</td>
+            <td class="td-story">Trucks / VAN / Bike / Boat — Classifier, Angle detection, Remove BG</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+            <td><span class="owner">Yash</span></td>
+            <td class="td-eta">—</td>
+            <td><span class="prio">P6</span></td>
+            <td class="td-note">Next up</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">8</td>
+            <td class="td-story">Background Independent Warping (360 model accuracy)</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Hetansh</span></td>
+            <td class="td-eta">11 May</td>
+            <td><span class="prio">P7</span></td>
+            <td class="td-note">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">9</td>
+            <td class="td-story">360 Processing time reduction to under 6 mins</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Tumul</span></td>
+            <td class="td-eta">8 May</td>
+            <td>—</td>
+            <td class="td-note">Trend of time reduction</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">10</td>
+            <td class="td-story">360 Processing time reduction to under 4 mins</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+            <td><span class="owner">Tumul</span></td>
+            <td class="td-eta">13 May</td>
+            <td>—</td>
+            <td class="td-note">+ cost optimization</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ LATER ══ -->
+  <div class="section" id="s-later">
+    <div class="section-title later-title" onclick="toggle('s-later')">
+      <span>📋</span>
+      <h2>Later — Backlog</h2>
+      <span class="count">13 items</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Feature / Story</th>
+            <th>Epic</th>
+            <th>Goal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">1</td>
+            <td class="td-story">Processing time reduction to under 1 second</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">2</td>
+            <td class="td-story">BG removal for new vehicle types</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">3</td>
+            <td class="td-story">8 Frame extraction — front & back angle centering</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">4</td>
+            <td class="td-story">Banner occlusion on car</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">5</td>
+            <td class="td-story">Snow Removal</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">6</td>
+            <td class="td-story">Background removal + 360 creation on app</td>
+            <td><span class="epic epic-edge">On-Edge</span></td>
+            <td class="td-goal">Reduce days to frontline</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">7</td>
+            <td class="td-story">Smart Banner creation with AI</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Increase sales conversion</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">8</td>
+            <td class="td-story">360 Interior Remove 3G Model</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">9</td>
+            <td class="td-story">Service Separation 360</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">10</td>
+            <td class="td-story">Tilt correction in placement correction tool</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">11</td>
+            <td class="td-story">Placement logic improvement for 8 images to 360</td>
+            <td><span class="epic epic-360">360 Spin</span></td>
+            <td class="td-goal">—</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">12</td>
+            <td class="td-story">Marketing Images (Banner &amp; Billboard) classifier</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">Accuracy improvements</td>
+          </tr>
+          <tr>
+            <td style="color:#94a3b8;font-size:11px;">13</td>
+            <td class="td-story">Exterior Remove BG — 360 + Image</td>
+            <td><span class="epic epic-img">Images</span></td>
+            <td class="td-goal">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">Spyne AI Roadmap &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; May 2025</div>
+
+</div>
+
+<script>
+  function toggle(id) {
+    const sec = document.getElementById(id);
+    sec.classList.toggle('closed');
+  }
+</script>
+</body>
+</html>
